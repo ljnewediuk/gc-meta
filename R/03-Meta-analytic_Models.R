@@ -14,6 +14,9 @@ dat_es <- readRDS('derived_data/effect_sizes.rds') %>%
   # Use only studies published between 2008 and 2021
   filter(yr %in% 2008:2021)
 
+# Egger's test for publication bias
+regtest(x = yi_f, vi = vi_f, data = dat_es)
+
 # Test effects of stressor on fitness and GCs independently
 # Grand mean effect sizes indicate that overall, verts produce more GCs in 
 # response to stressors and fitness decreases in response to stressors.
