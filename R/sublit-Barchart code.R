@@ -11,7 +11,7 @@ View(GC_sublit_data)
 sublit <- GC_sublit_data
 
 #Organizning data#
-sublit %>% 
+barchart <- sublit %>% 
   #Filtering for usable papers#
   filter(usable=="y") %>%
   #summarising number of papers under each conditions (4 in total)#
@@ -23,21 +23,25 @@ sublit %>%
  mutate(perc=case_when(percent>0 ~ "%")) %>%
 unite(., percent, c('percent', 'perc'), sep="") %>%
   #plot for barchart#
-  ggplot(aes(x=factor(FM_and_I, levels=c("n&y", "y&y", "y&n", "n&n"), labels = c("Did not measure fitness\nmade implication\non population health", "Measured fitness\nmade implication\non population health", "Measured fitness\ndid not make implication\non population health", "Did not measure fitness\ndid not make implication\non population health")), y=ratio*100, fill=FM_and_I)) +
+  ggplot(aes(x=factor(FM_and_I, levels=c("n&y", "y&y", "y&n", "n&n"), labels = c("No fitness\nPH inference", "Fitness\nPH inference", "Fitness\nno PH inference", "No fitness\nno PH inference")), y=ratio*100, fill=FM_and_I)) +
   geom_col(color="black") +
   geom_text(aes(label = percent), colour="white",  
-            position = position_stack(vjust = 0.5)) +
-  scale_fill_brewer(palette = "BrBG", guide=NULL) +
+            position = position_stack(vjust = 0.5), size = 5) +
+  scale_fill_brewer(palette = "PuBu", guide=NULL, direction = -1) +
   labs(x=NULL, y="Percentage of papers (%)") +
   scale_y_continuous(limits=c(0,60), breaks=seq(0, 60, 15)) +
-  theme(panel.border = element_rect(colour = "black", size=1, fill=FALSE),
-    panel.background = element_rect(fill = "white"), 
-    axis.title.y = element_text(size = 15), 
-    axis.text = element_text(size=13))
+  theme(legend.position = 'none',
+        axis.title.x = element_text(size = 18, vjust = -3),
+        axis.title.y = element_text(size = 18, vjust = 4),
+        axis.text = element_text(size = 18),
+        panel.background = element_rect(colour = 'black', fill = 'white'),
+        plot.background = element_rect(fill = 'white', colour = 'white'),
+        plot.margin = unit(c(0.5, 0.5, 1, 1), 'cm'),
+        panel.grid = element_blank())
 
 # Save plot
-ggsave('figures/bar_chart.tiff', 
-       last_plot(), device = 'tiff', 
+ggsave(filename='bar_chart.tiff', path = "Desktop/gcfigures", 
+       barchart, device = 'tiff', 
        width = 32, height = 12, units = 'cm', dpi = 300)
 
 
