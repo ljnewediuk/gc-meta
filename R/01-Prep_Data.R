@@ -22,7 +22,8 @@ dat <- read.csv('input/raw_data_2.csv') %>%
   mutate(sd_gc_low = se_gc_low * sqrt(n_gc_low),
          sd_gc_high = se_gc_high * sqrt(n_gc_high),
          sd_fitness_low = se_fitness_low * sqrt(n_fitness_low),
-         sd_fitness_high = se_fitness_high * sqrt(n_fitness_high))
+         sd_fitness_high = se_fitness_high * sqrt(n_fitness_high)) %>%
+  filter(yr %in% c(2008:2022))
 
 # Calculate effect sizes
 # Fitness

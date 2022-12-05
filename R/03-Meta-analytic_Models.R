@@ -10,9 +10,7 @@ library(tidyverse)
 library(metafor)
 
 # Load effect size data
-dat_es <- readRDS('derived_data/effect_sizes.rds') %>%
-  # Use only studies published between 2008 and 2021
-  filter(yr %in% 2008:2021)
+dat_es <- readRDS('derived_data/effect_sizes.rds') 
 
 # Egger's test for publication bias
 regtest(x = yi_f, vi = vi_f, data = dat_es)
