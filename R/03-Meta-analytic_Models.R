@@ -12,9 +12,6 @@ library(metafor)
 # Load effect size data
 dat_es <- readRDS('derived_data/effect_sizes.rds') 
 
-# Egger's test for publication bias
-regtest(x = yi_f, vi = vi_f, data = dat_es)
-
 # Test effects of stressor on fitness and GCs independently
 # Grand mean effect sizes indicate that overall, verts produce more GCs in 
 # response to stressors and fitness decreases in response to stressors.
@@ -31,11 +28,6 @@ gc_mod <- rma.mv(data = dat_es, yi = yi_gc, V = vi_gc,
 # Get confidence intervals
 gc_cint <- data.frame(beta = gc_mod$beta, 
                       lower = gc_mod$ci.lb, upper = gc_mod$ci.ub)
-
-# Key papers to cite:
-#   Bonier et al. 2009
-#   Patterson et al. 2014
-#   Breuner & Berk 2019
 
 # Sex differences in GC production and fitness
 # 
