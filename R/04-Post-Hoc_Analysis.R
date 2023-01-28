@@ -7,7 +7,7 @@ require(tidyverse)
 dat_es <- readRDS("derived_data/effect_sizes.rds")
 
 #Load post-hoc data
-PostData <- readRDS("input/meta_dat.rds") %>%
+PostData <- readRDS("input/post_hoc_data.rds") %>%
 select("uid","sample_type", "invasiveness", "study_groups") %>%
   left_join(dat_es) 
 
