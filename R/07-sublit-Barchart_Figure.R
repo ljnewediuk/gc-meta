@@ -4,20 +4,17 @@ require(plyr)
 require(ggplot2)
 
 # Import data set #
-library(readxl)
-GC_sublit_data <- read_excel("input/GC_sublit_data.xlsx")
-View(GC_sublit_data)
-#rename#
-sublit <- GC_sublit_data
+sublit <- read.csv("input/GC_sublit_data.csv")
+View(sublit)
 
 #Organizning data#
 barchart <- sublit %>% 
   #Filtering for usable papers#
   filter(usable=="y") %>%
   #summarising number of papers under each conditions (4 in total)#
-  ddply(.(`Measured fitness`, `Fitness implications of GCs`), summarise, value=sum(value)) %>%
+  ddply(.(`Measured.fitness`, `Fitness.implications.of.GCs`), summarise, value=sum(value)) %>%
   #combining columns: 'Measured fitness' and 'fitness implications of GC's' for creating plot#
-  unite(., FM_and_I, c(`Measured fitness`, `Fitness implications of GCs`), sep='&') %>%
+  unite(., FM_and_I, c(`Measured.fitness`, `Fitness.implications.of.GCs`), sep='&') %>%
   
   ddply(.(FM_and_I), summarise, ratio=value/35, percent=round((value/35)*100, digits = 0)) %>%
  mutate(perc=case_when(percent>0 ~ "%")) %>%

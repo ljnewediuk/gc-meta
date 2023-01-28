@@ -10,9 +10,7 @@ library(tidyverse)
 library(cowplot)
 
 # Load data
-dat_es <- readRDS('derived_data/effect_sizes.rds') %>%
-  # Use only studies published between 2008 and 2021
-  filter(yr %in% 2008:2021)
+dat_es <- readRDS('derived_data/effect_sizes.rds') 
 
 # Load model outputs
 f_cint <- readRDS('output/fit_meta_confint.rds')
