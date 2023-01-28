@@ -5,7 +5,7 @@ require(ggplot2)
 
 # Import data set #
 library(readxl)
-GC_sublit_data <- read_excel("Desktop/GC_Analysis_sublit/GC_sublit_data.xlsx")
+GC_sublit_data <- read_excel("input/GC_sublit_data.xlsx")
 View(GC_sublit_data)
 #rename#
 sublit <- GC_sublit_data
