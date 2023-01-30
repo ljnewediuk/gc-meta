@@ -45,7 +45,7 @@ mod_cor <- mod$VCV[, 2]/
 
 # Make data frame of posterior distribution draws by iteration number
 mod_cor_dat <- as.data.frame(mod_cor) %>% 
-  rename('draws' = var1) %>% 
+  rename('draws' == var1) %>% 
   mutate(iteration = 1:4000)
 
 # Get Kernel density estimates for posterior
@@ -76,7 +76,7 @@ scatter_plot <- ggplot(data = dat_es, aes(x = yi_gc, y = yi_f)) +
   
 # Plot posterior density
 post_plot <- ggplot(data = dens_dat, aes(x, y)) + 
-  geom_line(colour = '#2636e3', size = 1) + 
+  geom_line(colour = '#2636e3', linewidth = 1) + 
   geom_ribbon(aes(ymin = 0, ymax = y, fill = quant), alpha = 0.4) + 
   geom_linerange(aes(x = mean(mod_cor), ymin = 0, ymax = 0.605), 
                  colour = '#2636e3', size = 1) +

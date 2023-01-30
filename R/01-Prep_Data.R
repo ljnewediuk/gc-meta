@@ -6,10 +6,10 @@ library(metafor)
 dat_anage <- read.delim('input/anage_data.txt') %>%
   mutate(species_name = paste0(tolower(Genus), '_', Species)) %>%
   select(species_name, `Maximum.longevity..yrs.`) %>%
-  rename('lifespan' = `Maximum.longevity..yrs.`)
+  rename(., `Maximum.longevity..yrs.` == lifespan)
 
 # Load data
-dat <- read.csv('input/raw_data_2.csv') %>%
+dat <- readRDS('input/meta_dat.rds') %>%
   # Fill number of fitness samples with gc samples if same
   mutate(n_fitness_low = ifelse(is.na(n_fitness_low), n_gc_low, n_fitness_low),
          n_fitness_high = ifelse(is.na(n_fitness_high), n_gc_high, n_fitness_high)) %>%
@@ -40,7 +40,7 @@ dat_es <- escalc(data = f_es, measure = 'SMD',
   # Make remaining misc. changes to data
   #  Make all species name lowercase
   mutate(species_name = tolower(species_name)) %>%
-  # Fix misspelled species names
+  # Fix misspelled or old species names
   mutate(species_name = ifelse(species_name == 'dicologoglossa_cuneata', 'dicologlossa_cuneata', species_name)) %>%
   mutate(species_name = ifelse(species_name == 'brycon _nsignis', 'brycon_insignis', species_name)) %>%
   mutate(species_name = ifelse(species_name == 'scortum barcoo', 'scortum_barcoo', species_name)) %>%
@@ -53,7 +53,6 @@ dat_es <- escalc(data = f_es, measure = 'SMD',
   mutate(sex = ifelse(sex == 'both', NA, sex)) %>%
   # Join longevity data
   left_join(dat_anage)
-
 
 
 # Save data for models

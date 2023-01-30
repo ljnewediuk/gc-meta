@@ -4,30 +4,17 @@ require(plyr)
 require(ggplot2)
 
 # Import data set #
-<<<<<<< Updated upstream:R/sublit-Barchart code.R
-library(readxl)
-GC_sublit_data <- read_excel("Desktop/GC_Analysis_sublit/GC_sublit_data.xlsx")
-View(GC_sublit_data)
-#rename#
-sublit <- GC_sublit_data
-=======
 sublit <- read.csv("input/GC_sublit_data.csv")
->>>>>>> Stashed changes:R/07-sublit-Barchart_Figure.R
 
 
 #Organizing data#
 barchart <- sublit %>% 
   #Filtering for usable papers#
   filter(usable=="y") %>%
-<<<<<<< Updated upstream:R/sublit-Barchart code.R
-  #summarising number of papers under each conditions (4 in total)#
-  ddply(.(`Measured fitness`, `Fitness implications of GCs`), summarise, value=sum(value)) %>%
-=======
   #summarizing number of papers under each conditions (4 in total)#
   ddply(.(`Measured.fitness`, `Fitness.implications.of.GCs`), summarise, value=sum(value)) %>%
->>>>>>> Stashed changes:R/07-sublit-Barchart_Figure.R
   #combining columns: 'Measured fitness' and 'fitness implications of GC's' for creating plot#
-  unite(., FM_and_I, c(`Measured fitness`, `Fitness implications of GCs`), sep='&') %>%
+  unite(., FM_and_I, c(`Measured.fitness`, `Fitness.implications.of.GCs`), sep='&') %>%
   
   ddply(.(FM_and_I), summarise, ratio=value/35, percent=round((value/35)*100, digits = 0)) %>%
  mutate(perc=case_when(percent>0 ~ "%")) %>%

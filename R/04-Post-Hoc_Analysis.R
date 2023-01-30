@@ -4,12 +4,10 @@
 require(metafor)
 require(tidyverse)
 
-dat_es <- readRDS("/Users/devonbath/Documents/Github/gc-meta/derived_data/effect_sizes.rds") %>%
-filter(yr >= 2008) 
+dat_es <- readRDS("derived_data/effect_sizes.rds")
 
 #Load post-hoc data
-PostData <- read_csv("/Users/devonbath/Documents/Github/gc-meta/input/post_hoc_data.csv") %>%
-  filter(yr >= 2008) %>%
+PostData <- readRDS("input/post_hoc_data.rds") %>%
 select("uid","sample_type", "invasiveness", "study_groups") %>%
   left_join(dat_es) 
 
