@@ -78,15 +78,16 @@ rma.mv(data = PostData, yi = yi_gc, V = vi_gc,
 
 # GC's model with sampling type as a random effect
 rma.mv(data = PostData, yi = yi_gc, V = vi_gc, 
-                random = list(~ 1|study_id/uid, ~1|species_name, ~1|fitness_type, ~1|sample_type))
+                random = list(~ 1|study_id/uid, ~1|species_name, ~1|fitness_type, ~1|sample_type),
                      lower = f_mod$ci.lb, upper = f_mod$ci.ub)
 
 
 # Fitness model with lab/field as a random effect
 f_mod <- rma.mv(data = PostData, yi = yi_f, V = vi_f, 
-                random = list(~ 1|study_id/uid, ~1|species_name, ~1|fitness_type, ~1|location))
+                random = list(~ 1|study_id/uid, ~1|species_name, ~1|fitness_type, ~1|location),
 lower = f_mod$ci.lb, upper = f_mod$ci.ub)
 
 # Glucocorticoids model with lab/field as a random effect
 gc_mod <- rma.mv(data = PostData, yi = yi_gc, V = vi_gc, 
                  random = list(~ 1|study_id/uid, ~1|species_name, ~1|stressor_type, ~1|location))
+
