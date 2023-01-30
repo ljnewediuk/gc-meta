@@ -10,7 +10,6 @@ library(cowplot)
 
 # Load data
 dat_es <- readRDS('derived_data/effect_sizes.rds') %>% 
-  filter(yr %in% 2008:2021) %>%
   select(study_id, yi_f, yi_gc, vi_f, vi_gc, 
          fitness_type, stressor_type, life_history_stage) %>%
   na.omit()
