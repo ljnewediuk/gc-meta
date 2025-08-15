@@ -20,14 +20,14 @@ GCfsnstudy
 #Fitness funnel plot
 fit_pb_test <- rma.mv(data = dat_es, yi = yi_f, V = vi_f, mods = I(1/n_fitness_low),
                       random = list(~ 1|study_id/uid, ~1|species_name, ~1|fitness_type))
-# tiff("Desktop/gcfigures/funnelplots/fitness funnel plot.tiff", width = 7, height = 7, units = "in", res = 300,compression="lzw")
+tiff('figures/funn_plot_fitness.tiff', width = 7, height = 7, units = "in", res = 300)
 funnel(fit_pb_test, level=c(90, 95, 99), shade=c("white", "#FFC107", "#0097A7"), refline=0, legend=TRUE)
 dev.off()
 
 #GCs funnel plot
 GC_pb_test <- rma.mv(data = dat_es, yi = yi_gc, V = vi_gc, mods = I(1/n_gc_low),
                      random = list(~ 1|study_id/uid, ~1|species_name, ~1|fitness_type))
-# tiff("Desktop/gcfigures/funnelplots/gc funnel plot.tiff", width = 7, height = 7, units = "in", res = 300,compression="lzw")
+tiff('figures/funn_plot_gc.tiff', width = 7, height = 7, units = "in", res = 300)
 funnel(GC_pb_test, level=c(90, 95, 99), shade=c("white", "#FFC107", "#0097A7"), refline=0, legend=TRUE)
 dev.off()
 
@@ -35,7 +35,7 @@ dev.off()
 sex_gc_mod <- rma.mv(data = dat_es, yi = yi_gc, V = vi_gc, 
        mods = ~ factor(sex) + I(1/n_fitness_low), 
        random = list(~ 1|study_id/uid, ~1|species_name, ~1|stressor_type))
-# tiff("Desktop/gcfigures/funnelplots/gc and sex funnel plot.tiff", width = 7, height = 7, units = "in", res = 300,compression="lzw")
+tiff('figures/funn_plot_gc_sex.tiff', width = 7, height = 7, units = "in", res = 300)
 funnel(sex_gc_mod, level=c(90, 95, 99), shade=c("white", "#FFC107", "#0097A7"), refline=0, legend=TRUE)
 dev.off()
 
@@ -43,7 +43,7 @@ dev.off()
 sex_fit_mod <- rma.mv(data = dat_es, yi = yi_f, V = vi_f,
        mods = ~ factor(sex) + I(1/n_fitness_low), 
        random = list(~ 1|study_id/uid, ~1|species_name, ~1|fitness_type))
-# tiff("Desktop/gcfigures/funnelplots/fitness and sex funnel plot.tiff", width = 7, height = 7, units = "in", res = 300,compression="lzw")
+tiff('figures/funn_plot_fitness_sex.tiff', width = 7, height = 7, units = "in", res = 300)
 funnel(sex_fit_mod, level=c(90, 95, 99), shade=c("white", "#FFC107", "#0097A7"), refline=0, legend=TRUE)
 dev.off()
 
@@ -51,7 +51,7 @@ dev.off()
 lon_gc_mod <- rma.mv(data = dat_es, yi = yi_gc, V = vi_gc, 
        mods = ~ lifespan + I(1/n_fitness_low), 
        random = list(~ 1|study_id/uid, ~1|species_name, ~1|stressor_type))
-# tiff("Desktop/gcfigures/funnelplots/gc and long funnel plot.tiff", width = 7, height = 7, units = "in", res = 300,compression="lzw")
+tiff('figures/funn_plot_gc_longevity.tiff', width = 7, height = 7, units = "in", res = 300)
 funnel(lon_gc_mod, level=c(90, 95, 99), shade=c("white", "#FFC107", "#0097A7"), refline=0, legend=TRUE)
 dev.off()
 
@@ -59,24 +59,24 @@ dev.off()
 lon_fit_mod <- rma.mv(data = dat_es, yi = yi_f, V = vi_f, 
        mods = ~ lifespan + I(1/n_fitness_low), 
        random = list(~ 1|study_id/uid, ~1|species_name, ~1|fitness_type))
-# tiff("Desktop/gcfigures/funnelplots/fitness and long funnel plot.tiff", width = 7, height = 7, units = "in", res = 300,compression="lzw")
+tiff('figures/funn_plot_fitness_longevity.tiff', width = 7, height = 7, units = "in", res = 300)
 funnel(lon_fit_mod, level=c(90, 95, 99), shade=c("white", "#FFC107", "#0097A7"), refline=0, legend=TRUE)
 dev.off()
 
 # LHS moderator on GCs
-LHS_fit_mod <- rma.mv(data = dat_es, yi = yi_gc, V = vi_gc, 
+LHS_gc_mod <- rma.mv(data = dat_es, yi = yi_gc, V = vi_gc, 
        mods = ~ factor(life_history_stage) + I(1/n_fitness_low), 
        random = list(~ 1|study_id/uid, ~1|species_name, ~1|stressor_type))
-# tiff("Desktop/gcfigures/funnelplots/gc and LHS funnel plot.tiff", width = 7, height = 7, units = "in", res = 300,compression="lzw")
-funnel(LHS_fit_mod, level=c(90, 95, 99), shade=c("white", "#FFC107", "#0097A7"), refline=0, legend=TRUE)
+tiff('figures/funn_plot_gc_lhs.tiff', width = 7, height = 7, units = "in", res = 300)
+funnel(LHS_gc_mod, level=c(90, 95, 99), shade=c("white", "#FFC107", "#0097A7"), refline=0, legend=TRUE)
 dev.off()
 
 # LHS moderator on fitness
-LHS_gc_mod <- rma.mv(data = dat_es, yi = yi_f, V = vi_f, 
+LHS_fit_mod <- rma.mv(data = dat_es, yi = yi_f, V = vi_f, 
        mods = ~ factor(life_history_stage) + I(1/n_fitness_low), 
        random = list(~ 1|study_id/uid, ~1|species_name, ~1|fitness_type))
-# tiff("Desktop/gcfigures/funnelplots/fitness and LHS funnel plot.tiff", width = 7, height = 7, units = "in", res = 300,compression="lzw")
-funnel(LHS_gc_mod, level=c(90, 95, 99), shade=c("white", "#FFC107", "#0097A7"), refline=0, legend=TRUE)
+tiff('figures/funn_plot_fitness_lhs.tiff', width = 7, height = 7, units = "in", res = 300)
+funnel(LHS_fit_mod, level=c(90, 95, 99), shade=c("white", "#FFC107", "#0097A7"), refline=0, legend=TRUE)
 dev.off()
 
 

@@ -21,7 +21,7 @@ barchart <- sublit %>%
 unite(., percent, c('percent', 'perc'), sep="") %>%
   #plot for barchart#
   ggplot(aes(x=factor(FM_and_I, levels=c("n&y", "y&y", "y&n", "n&n"), labels = c("No fitness\nPH inference", "Fitness\nPH inference", "Fitness\nno PH inference", "No fitness\nno PH inference")), y=ratio*100, fill=FM_and_I)) +
-  geom_col(color="black") +
+  geom_col(color="black", fill = '#808080') +
   geom_text(aes(label = percent), colour="white",  
             position = position_stack(vjust = 0.5), size = 5) +
   scale_fill_brewer(palette = "PuBu", guide=NULL, direction = -1) +
@@ -37,8 +37,7 @@ unite(., percent, c('percent', 'perc'), sep="") %>%
         panel.grid = element_blank())
 
 # Save plot
-ggsave(filename='bar_chart.tiff', path = "Desktop/gcfigures", 
-       barchart, device = 'tiff', 
+ggsave(filename='bar_chart.tiff', path = "figures/", barchart, device = 'tiff', 
        width = 32, height = 12, units = 'cm', dpi = 300)
 
 
